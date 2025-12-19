@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Profil Guru - TK Cikal Harapan 3</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ===== GLOBAL ===== */
+    * {box-sizing:border-box;margin:0;padding:0}
+    body {
+      font-family:'Fredoka', 'Comic Sans MS', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background:linear-gradient(135deg, #d4f1d4 0%, #a8e6a8 100%);
+      background-attachment:fixed;
+      color:#333;
+      line-height:1.6;
+      scroll-behavior:smooth;
+      position:relative;
+    }
+
+    /* Floating shapes background */
+    body::before {
+      content:"";
+      position:fixed;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+      background-image:
+        radial-gradient(circle at 20% 80%, rgba(76, 175, 80, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(129, 199, 132, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(165, 214, 167, 0.3) 0%, transparent 50%);
+      pointer-events:none;
+      z-index:0;
+    }
+
+    /* ===== NAV ===== */
+    nav {
+      background:#fff;
+      padding:0;
+      position:sticky;
+      top:0;
+      z-index:100;
+      box-shadow:0 4px 15px rgba(0,0,0,.1);
+      border-bottom:5px solid #4CAF50;
+    }
+    .nav-container {
+      max-width:1200px;
+      margin:0 auto;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:16px 24px;
+    }
+    .nav-brand {
+      font-size:24px;
+      font-weight:700;
+      color:#2E7D32;
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+    .nav-brand::before {
+      content:"🏫";
+      font-size:32px;
+      filter:drop-shadow(2px 2px 4px rgba(0,0,0,0.2));
+    }
+    nav ul {
+      list-style:none;
+      display:flex;
+      gap:8px;
+    }
+    nav a {
+      color:#555;
+      text-decoration:none;
+      padding:10px 20px;
+      border-radius:25px;
+      font-weight:600;
+      font-size:15px;
+      transition:all .3s ease;
+      position:relative;
+    }
+    nav a:hover {
+      background:#81C784;
+      color:#fff;
+      transform:translateY(-3px) scale(1.05);
+      box-shadow:0 5px 15px rgba(129, 199, 132, 0.4);
+    }
+    nav a.active {
+      background:#4CAF50;
+      color:#fff;
+      box-shadow:0 5px 15px rgba(76, 175, 80, 0.4);
+    }
+
+    /* ===== HEADER ===== */
+    header {
+      background:linear-gradient(135deg,#2E7D32 0%, #4CAF50 50%, #81C784 100%);
+      color:#fff;
+      padding:100px 24px;
+      text-align:center;
+      position:relative;
+      overflow:hidden;
+    }
+    header::before {
+      content:"";
+      position:absolute;
+      top:-50%;
+      left:-50%;
+      width:200%;
+      height:200%;
+      background:repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 15px,
+        rgba(255,255,255,0.1) 15px,
+        rgba(255,255,255,0.1) 30px
+      );
+      animation:moveStripes 30s linear infinite;
+    }
+    @keyframes moveStripes {
+      0% {transform:translate(0,0)}
+      100% {transform:translate(50px,50px)}
+    }
+
+    /* Floating doodles */
+    .doodle {
+      position:absolute;
+      font-size:50px;
+      opacity:0.5;
+      animation:float 7s ease-in-out infinite;
+    }
+    .doodle:nth-child(1) {top:15%;left:10%;animation-delay:0s;}
+    .doodle:nth-child(2) {top:65%;left:15%;animation-delay:1s;font-size:40px;}
+    .doodle:nth-child(3) {top:25%;right:10%;animation-delay:2s;font-size:55px;}
+    .doodle:nth-child(4) {top:75%;right:15%;animation-delay:1.5s;}
+    .doodle:nth-child(5) {top:45%;left:50%;animation-delay:0.5s;font-size:60px;}
+
+    @keyframes float {
+      0%, 100% {transform:translateY(0px) rotate(-5deg)}
+      50% {transform:translateY(-25px) rotate(5deg)}
+    }
+
+    .header-content {
+      position:relative;
+      z-index:1;
+      max-width:800px;
+      margin:0 auto;
+    }
+    header h1 {
+      font-size:48px;
+      margin-bottom:16px;
+      font-weight:700;
+      color:#fff;
+      text-shadow:3px 3px 0px #1B5E20;
+      animation:bounceIn 1s ease;
+    }
+    header p {
+      font-size:22px;
+      font-weight:600;
+      text-shadow:2px 2px 4px rgba(0,0,0,0.2);
+      animation:bounceIn 1.2s ease;
+    }
+
+    @keyframes bounceIn {
+      0% {opacity:0;transform:scale(0.3)}
+      50% {opacity:1;transform:scale(1.05)}
+      70% {transform:scale(0.9)}
+      100% {transform:scale(1)}
+    }
+
+    /* ===== CONTAINER ===== */
+    .container {
+      width:92%;
+      max-width:1000px;
+      margin:-60px auto 40px;
+      background:#fff;
+      padding:0;
+      border-radius:30px;
+      box-shadow:0 20px 60px rgba(0,0,0,.15);
+      animation:slideUp 1s ease;
+      overflow:hidden;
+      border:5px dashed #4CAF50;
+    }
+
+    @keyframes slideUp {
+      from{opacity:0;transform:translateY(60px)}
+      to{opacity:1;transform:translateY(0)}
+    }
+
+    /* ===== PROFILE CARD ===== */
+    .profile-header {
+      background:linear-gradient(135deg,#A5D6A7 0%, #81C784 100%);
+      padding:48px 32px 32px;
+      text-align:center;
+      position:relative;
+    }
+    .profile-avatar {
+      position:relative;
+      display:inline-block;
+      margin-bottom:20px;
+    }
+    .profile-avatar img {
+      width:180px;
+      height:180px;
+      border-radius:50%;
+      object-fit:cover;
+      border:8px solid #fff;
+      box-shadow:0 12px 40px rgba(0,0,0,.2);
+      transition:all .4s ease;
+      animation:zoomIn .8s ease;
+    }
+    .profile-avatar img:hover {
+      transform:scale(1.15) rotate(8deg);
+      box-shadow:0 16px 50px rgba(0,0,0,.3);
+    }
+    .profile-avatar::after {
+      content:"⭐";
+      position:absolute;
+      bottom:10px;
+      right:10px;
+      background:#4CAF50;
+      color:#fff;
+      width:50px;
+      height:50px;
+      border-radius:50%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:28px;
+      font-weight:900;
+      border:5px solid #fff;
+      box-shadow:0 6px 16px rgba(76, 175, 80, 0.5);
+      animation:pulse 2s ease infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% {transform:scale(1)}
+      50% {transform:scale(1.1)}
+    }
+
+    @keyframes zoomIn {
+      from{opacity:0;transform:scale(.5) rotate(-10deg)}
+      to{opacity:1;transform:scale(1) rotate(0deg)}
+    }
+
+    .profile-info {
+      padding:0 32px 32px;
+    }
+    .profile-info h2 {
+      font-size:32px;
+      margin-bottom:12px;
+      font-weight:700;
+      color:#2E7D32;
+    }
+    .profile-badge {
+      display:inline-block;
+      background:#4CAF50;
+      color:#fff;
+      padding:8px 20px;
+      border-radius:25px;
+      font-size:14px;
+      font-weight:700;
+      margin-bottom:20px;
+      border:3px solid #388E3C;
+      box-shadow:0 4px 12px rgba(76, 175, 80, 0.3);
+    }
+    .profile-description {
+      font-size:16px;
+      color:#555;
+      max-width:700px;
+      margin:0 auto 24px;
+      line-height:1.8;
+      font-weight:500;
+      background:#f1f8e9;
+      padding:20px;
+      border-radius:20px;
+      border-left:5px solid #4CAF50;
+    }
+
+    /* ===== STATS ===== */
+    .stats {
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+      gap:5px;
+      background:#e0f2e0;
+      margin-top:32px;
+    }
+    .stat-item {
+      background:#fff;
+      padding:32px 20px;
+      text-align:center;
+      transition:all .4s ease;
+      position:relative;
+    }
+    .stat-item::before {
+      content:"";
+      position:absolute;
+      top:0;
+      left:0;
+      right:0;
+      height:5px;
+      background:linear-gradient(90deg, #2E7D32, #4CAF50);
+      transform:scaleX(0);
+      transition:transform .4s;
+    }
+    .stat-item:hover::before {
+      transform:scaleX(1);
+    }
+    .stat-item:hover {
+      background:linear-gradient(135deg, #A5D6A7 0%, #81C784 100%);
+      transform:translateY(-8px) scale(1.05);
+      box-shadow:0 12px 24px rgba(76, 175, 80, 0.3);
+    }
+    .stat-number {
+      font-size:40px;
+      font-weight:700;
+      color:#2E7D32;
+      margin-bottom:8px;
+      animation:countUp 1s ease;
+    }
+    @keyframes countUp {
+      from {opacity:0;transform:translateY(20px)}
+      to {opacity:1;transform:translateY(0)}
+    }
+    .stat-label {
+      font-size:14px;
+      color:#555;
+      text-transform:uppercase;
+      letter-spacing:1px;
+      font-weight:600;
+    }
+
+    /* ===== INFO SECTION ===== */
+    .info-section {
+      padding:48px 32px;
+      text-align:center;
+    }
+    .info-card {
+      background:linear-gradient(135deg,#C8E6C9 0%, #A5D6A7 100%);
+      border-left:6px solid #4CAF50;
+      padding:28px;
+      border-radius:20px;
+      max-width:700px;
+      margin:0 auto;
+      text-align:left;
+      box-shadow:0 8px 24px rgba(76, 175, 80, 0.2);
+      transition:all .3s;
+      animation:slideUp 1.2s ease;
+    }
+    .info-card:hover {
+      transform:translateY(-4px);
+      box-shadow:0 12px 32px rgba(76, 175, 80, 0.3);
+    }
+    .info-card h3 {
+      font-size:20px;
+      color:#1B5E20;
+      margin-bottom:16px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-weight:700;
+    }
+    .info-card h3::before {
+      content:"💡";
+      font-size:28px;
+      animation:bounce 2s ease infinite;
+    }
+    @keyframes bounce {
+      0%, 100% {transform:translateY(0)}
+      50% {transform:translateY(-10px)}
+    }
+    .info-card p {
+      color:#1B5E20;
+      font-size:15px;
+      line-height:1.8;
+      font-weight:500;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background:#1B5E20;
+      color:#ddd;
+      text-align:center;
+      padding:40px 24px;
+      margin-top:60px;
+      font-size:14px;
+      position:relative;
+      overflow:hidden;
+    }
+
+    footer::before {
+      content:"";
+      position:absolute;
+      top:0;
+      left:0;
+      right:0;
+      height:5px;
+      background:linear-gradient(90deg, #2E7D32, #4CAF50, #81C784, #A5D6A7);
+    }
+
+    .footer-content {
+      max-width:1000px;
+      margin:0 auto;
+      position:relative;
+      z-index:1;
+    }
+    .footer-text {
+      margin-bottom:12px;
+      font-weight:600;
+      font-size:16px;
+    }
+    .footer-links {
+      display:flex;
+      justify-content:center;
+      gap:24px;
+      margin-top:20px;
+    }
+    .footer-links a {
+      color:#aaa;
+      text-decoration:none;
+      transition:.3s;
+      font-weight:600;
+      padding:8px 16px;
+      border-radius:12px;
+    }
+    .footer-links a:hover {
+      color:#fff;
+      background:#4CAF50;
+      transform:translateY(-2px);
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media(max-width:768px){
+      body {
+        font-family:'Fredoka', 'Comic Sans MS', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      }
+      header h1 {font-size:36px}
+      header p {font-size:16px}
+      .nav-container {flex-direction:column;gap:16px;padding:16px}
+      nav ul {flex-wrap:wrap;justify-content:center}
+      .container {margin-top:-40px;border-width:3px}
+      .profile-header {padding:32px 20px 24px}
+      .profile-avatar img {width:150px;height:150px}
+      .profile-info {padding:0 20px 24px}
+      .profile-info h2 {font-size:26px}
+      .info-section {padding:32px 20px}
+      .stats {grid-template-columns:1fr 1fr}
+      .stat-number {font-size:32px}
+      .doodle {font-size:35px !important}
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-container">
+      <div class="nav-brand">TK Islam Cikal Harapan 3</div>
+      <ul>
+        <li><a href="index.html" class="active">Profil Guru</a></li>
+        <li><a href="foto_kbm.html">Foto KBM</a></li>
+        <li><a href="tka.html">TK A</a></li>
+        <li><a href="tkb.html">TK B</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <header>
+    <span class="doodle">🧸</span>
+    <span class="doodle">🎈</span>
+    <span class="doodle">🌈</span>
+    <span class="doodle">🖍️</span>
+    <span class="doodle">🧩</span>
+    <div class="header-content">
+      <h1>Laporan Sekolah</h1>
+      <p>TK Islam Cikal Harapan 3 T.A 25/26</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="profile-header">
+      <div class="profile-avatar">
+        <img src="img/guru 2.png" alt="Foto Guru">
+      </div>
+    </div>
+
+    <div class="profile-info">
+      <h2>Pak Galih</h2>
+      <div class="profile-badge">👨‍🏫 Guru Komputer</div>
+      <p class="profile-description">
+       Hai, perkenalkan nama saya Pak Galih! Saya adalah guru komputer yang senang bermain dan belajar bersama anak-anak. Saya akan mengajarkan anak-anak banyak hal seru tentang komputer, mulai dari menggambar, mengetik, hingga belajar bersama teman-teman di depan layar. Ayo, jadilah anak cerdas dan kreatif di era digital!
+      </p>
+    </div>
+
+    <div class="stats">
+      <div class="stat-item">
+        <div class="stat-number">5+</div>
+        <div class="stat-label">Tahun Mengajar</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">80+</div>
+        <div class="stat-label">Murid Cerdas</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">2</div>
+        <div class="stat-label">Tingkat Kelas</div>
+      </div>
+    </div>
+
+    <div class="info-section">
+      <div class="info-card">
+        <h3>Panduan Orang Tua</h3>
+        <p>
+          Selamat datang di laporan pembelajaran! Orang tua dapat menggunakan menu di atas untuk melihat aktivitas seru anak-anak di kelas. Kami memperbarui data secara berkala agar orang tua dapat terus mendampingi perkembangan si kecil. Mari kita bekerja sama untuk menciptakan pengalaman belajar yang menyenangkan dan bermakna bagi anak-anak kita.
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-text">
+        <strong>© 2025 TK Islam Cikal Harapan 3</strong>
+      </div>
+      <div style="opacity:.8;margin-top:8px;font-size:13px;font-weight:500">
+        Dibuat dengan penuh kasih untuk anak-anak Indonesia 🎓
+      </div>
+      <div class="footer-links">
+        <a href="tentang.html">Tentang</a>
+        <a href="kontak.html">Kontak</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

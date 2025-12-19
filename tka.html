@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Karya TK A - TK Cikal Harapan 3</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ===== GLOBAL ===== */
+    * {box-sizing:border-box;margin:0;padding:0}
+    body {
+      font-family:'Fredoka', 'Comic Sans MS', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background:linear-gradient(135deg, #d4f1d4 0%, #a8e6a8 100%);
+      background-attachment:fixed;
+      color:#333;
+      line-height:1.6;
+      scroll-behavior:smooth;
+      position:relative;
+    }
+
+    /* Floating shapes background */
+    body::before {
+      content:"";
+      position:fixed;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+      background-image:
+        radial-gradient(circle at 20% 80%, rgba(76, 175, 80, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(129, 199, 132, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(165, 214, 167, 0.3) 0%, transparent 50%);
+      pointer-events:none;
+      z-index:0;
+    }
+
+    /* ===== NAV ===== */
+    nav {
+      background:#fff;
+      padding:0;
+      position:sticky;
+      top:0;
+      z-index:100;
+      box-shadow:0 4px 15px rgba(0,0,0,.1);
+      border-bottom:5px solid #4CAF50;
+    }
+    .nav-container {
+      max-width:1200px;
+      margin:0 auto;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:16px 24px;
+    }
+    .nav-brand {
+      font-size:24px;
+      font-weight:700;
+      color:#2E7D32;
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+    .nav-brand::before {
+      content:"🏫";
+      font-size:32px;
+      filter:drop-shadow(2px 2px 4px rgba(0,0,0,0.2));
+    }
+    nav ul {
+      list-style:none;
+      display:flex;
+      gap:8px;
+    }
+    nav a {
+      color:#555;
+      text-decoration:none;
+      padding:10px 20px;
+      border-radius:25px;
+      font-weight:600;
+      font-size:15px;
+      transition:all .3s ease;
+      position:relative;
+    }
+    nav a:hover {
+      background:#81C784;
+      color:#fff;
+      transform:translateY(-3px) scale(1.05);
+      box-shadow:0 5px 15px rgba(129, 199, 132, 0.4);
+    }
+    nav a.active {
+      background:#4CAF50;
+      color:#fff;
+      box-shadow:0 5px 15px rgba(76, 175, 80, 0.4);
+    }
+
+    /* ===== HEADER ===== */
+    header {
+      background:linear-gradient(135deg,#2E7D32 0%, #4CAF50 50%, #81C784 100%);
+      color:#fff;
+      padding:100px 24px;
+      text-align:center;
+      position:relative;
+      overflow:hidden;
+    }
+    header::before {
+      content:"";
+      position:absolute;
+      top:-50%;
+      left:-50%;
+      width:200%;
+      height:200%;
+      background:repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 15px,
+        rgba(255,255,255,0.1) 15px,
+        rgba(255,255,255,0.1) 30px
+      );
+      animation:moveStripes 30s linear infinite;
+    }
+    @keyframes moveStripes {
+      0% {transform:translate(0,0)}
+      100% {transform:translate(50px,50px)}
+    }
+
+    /* Floating doodles */
+    .doodle {
+      position:absolute;
+      font-size:50px;
+      opacity:0.5;
+      animation:float 7s ease-in-out infinite;
+    }
+    .doodle:nth-child(1) {top:15%;left:10%;animation-delay:0s;}
+    .doodle:nth-child(2) {top:65%;left:15%;animation-delay:1s;font-size:40px;}
+    .doodle:nth-child(3) {top:25%;right:10%;animation-delay:2s;font-size:55px;}
+    .doodle:nth-child(4) {top:75%;right:15%;animation-delay:1.5s;}
+    .doodle:nth-child(5) {top:45%;left:50%;animation-delay:0.5s;font-size:60px;}
+
+    @keyframes float {
+      0%, 100% {transform:translateY(0px) rotate(-5deg)}
+      50% {transform:translateY(-25px) rotate(5deg)}
+    }
+
+    .header-content {
+      position:relative;
+      z-index:1;
+      max-width:800px;
+      margin:0 auto;
+    }
+    header h1 {
+      font-size:48px;
+      margin-bottom:16px;
+      font-weight:700;
+      color:#fff;
+      text-shadow:3px 3px 0px #1B5E20;
+      animation:bounceIn 1s ease;
+    }
+    header p {
+      font-size:22px;
+      font-weight:600;
+      text-shadow:2px 2px 4px rgba(0,0,0,0.2);
+      animation:bounceIn 1.2s ease;
+    }
+
+    @keyframes bounceIn {
+      0% {opacity:0;transform:scale(0.3)}
+      50% {opacity:1;transform:scale(1.05)}
+      70% {transform:scale(0.9)}
+      100% {transform:scale(1)}
+    }
+
+    /* ===== CONTAINER ===== */
+    .container {
+      width:92%;
+      max-width:1200px;
+      margin:-60px auto 40px;
+      background:#fff;
+      padding:48px 32px;
+      border-radius:30px;
+      box-shadow:0 20px 60px rgba(0,0,0,.15);
+      animation:slideUp 1s ease;
+      position:relative;
+      border:5px dashed #4CAF50;
+    }
+
+    @keyframes slideUp {
+      from{opacity:0;transform:translateY(60px)}
+      to{opacity:1;transform:translateY(0)}
+    }
+
+    /* ===== SECTION TITLE ===== */
+    .section-title {
+      text-align:center;
+      margin-bottom:40px;
+      position:relative;
+    }
+    .section-title h2 {
+      font-size:36px;
+      font-weight:900;
+      background:linear-gradient(135deg, #2E7D32 0%, #4CAF50 100%);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      background-clip:text;
+      margin-bottom:12px;
+      position:relative;
+      display:inline-block;
+    }
+    .section-title h2::after {
+      content:"";
+      position:absolute;
+      bottom:-8px;
+      left:50%;
+      transform:translateX(-50%);
+      width:80px;
+      height:4px;
+      background:linear-gradient(90deg, #2E7D32, #4CAF50);
+      border-radius:2px;
+    }
+    .section-title p {
+      color:#64748b;
+      font-size:16px;
+      max-width:600px;
+      margin:16px auto 0;
+      font-weight:600;
+    }
+
+    /* ===== PETA MATERI ===== */
+    .materi-section {
+      margin-bottom:60px;
+    }
+
+    .materi-grid {
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
+      gap:28px;
+      margin-top:40px;
+    }
+
+    .materi-card {
+      background:#fff;
+      border-radius:24px;
+      padding:32px 24px;
+      box-shadow:0 8px 24px rgba(0,0,0,.12);
+      transition:all .4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      animation:popIn 0.8s ease;
+      position:relative;
+      overflow:hidden;
+      border:4px solid transparent;
+    }
+
+    .materi-card::before {
+      content:"";
+      position:absolute;
+      top:0;
+      left:0;
+      right:0;
+      height:6px;
+      background:linear-gradient(90deg, #2E7D32, #4CAF50);
+    }
+
+    .materi-card:nth-child(1) {
+      animation-delay:0.1s;
+    }
+
+    .materi-card:nth-child(2) {
+      animation-delay:0.2s;
+    }
+
+    @keyframes popIn {
+      0% {opacity:0;transform:scale(0.8) rotate(-5deg)}
+      100% {opacity:1;transform:scale(1) rotate(0deg)}
+    }
+
+    .materi-card:hover {
+      transform:translateY(-12px) rotate(2deg);
+      box-shadow:0 16px 40px rgba(76, 175, 80, 0.3);
+      border-color:#4CAF50;
+    }
+
+    .materi-icon {
+      font-size:64px;
+      margin-bottom:20px;
+      display:block;
+      animation:bounce 2s ease infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% {transform:translateY(0)}
+      50% {transform:translateY(-10px)}
+    }
+
+    .materi-card h3 {
+      font-size:26px;
+      margin-bottom:12px;
+      font-weight:900;
+      color:#1e293b;
+    }
+
+    .materi-card p {
+      font-size:15px;
+      line-height:1.8;
+      color:#64748b;
+      margin-bottom:20px;
+      font-weight:600;
+    }
+
+    .materi-topics {
+      list-style:none;
+      margin-top:20px;
+      background:#f8fafc;
+      padding:16px;
+      border-radius:16px;
+    }
+
+    .materi-topics li {
+      padding:10px 0;
+      border-bottom:2px dashed #e2e8f0;
+      font-size:14px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      color:#475569;
+      font-weight:600;
+      transition:all .3s;
+    }
+
+    .materi-topics li:last-child {
+      border-bottom:none;
+    }
+
+    .materi-topics li:hover {
+      padding-left:8px;
+      color:#2E7D32;
+    }
+
+    .materi-topics li::before {
+      content:"✨";
+      font-size:18px;
+      animation:spin 3s linear infinite;
+    }
+
+    @keyframes spin {
+      0% {transform:rotate(0deg)}
+      100% {transform:rotate(360deg)}
+    }
+
+    /* ===== GALLERY KARYA ===== */
+    .karya-section {
+      margin-top:60px;
+      padding-top:40px;
+      border-top:4px dashed #e2e8f0;
+    }
+
+    .gallery-grid {
+      display:grid;
+      grid-template-columns:repeat(auto-fill, minmax(280px, 1fr));
+      gap:24px;
+      margin-top:32px;
+    }
+
+    .gallery-item {
+      background:#fff;
+      border-radius:20px;
+      overflow:hidden;
+      box-shadow:0 8px 24px rgba(0,0,0,.12);
+      transition:all .4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      cursor:pointer;
+      animation:popIn 0.8s ease forwards;
+      position:relative;
+      border:4px solid transparent;
+      opacity:0; /* Start hidden for animation */
+    }
+
+    .gallery-item::before {
+      content:"";
+      position:absolute;
+      top:0;
+      left:0;
+      right:0;
+      height:6px;
+      background:linear-gradient(90deg, #2E7D32, #4CAF50);
+    }
+
+    .gallery-item:hover {
+      transform:translateY(-12px) rotate(-2deg);
+      box-shadow:0 16px 40px rgba(76, 175, 80, 0.3);
+      border-color:#4CAF50;
+    }
+
+    .gallery-item img {
+      width:100%;
+      height:280px;
+      object-fit:cover;
+      display:block;
+      transition:all .4s ease;
+    }
+
+    .gallery-item:hover img {
+      transform:scale(1.1);
+    }
+
+    .gallery-caption {
+      padding:20px;
+      background:#fff;
+    }
+
+    .gallery-caption h3 {
+      font-size:18px;
+      color:#1e293b;
+      margin-bottom:8px;
+      font-weight:700;
+    }
+
+    .gallery-caption p {
+      font-size:14px;
+      color:#64748b;
+      line-height:1.6;
+      font-weight:600;
+    }
+
+    .gallery-tag {
+      display:inline-block;
+      background:#C8E6C9;
+      color:#1B5E20;
+      padding:6px 14px;
+      border-radius:16px;
+      font-size:12px;
+      font-weight:700;
+      margin-top:10px;
+    }
+
+    /* Empty State */
+    .empty-state {
+      grid-column:1 / -1;
+      text-align:center;
+      padding:80px 20px;
+      background:linear-gradient(135deg, #f1f8e9 0%, #dcedc8 100%);
+      border-radius:24px;
+      border:4px dashed #4CAF50;
+      animation:pulse 2s ease infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% {transform:scale(1)}
+      50% {transform:scale(1.02)}
+    }
+
+    .empty-state-icon {
+      font-size:80px;
+      margin-bottom:20px;
+      animation:swing 3s ease infinite;
+    }
+
+    @keyframes swing {
+      0%, 100% {transform:rotate(0deg)}
+      25% {transform:rotate(10deg)}
+      75% {transform:rotate(-10deg)}
+    }
+
+    .empty-state h3 {
+      font-size:24px;
+      color:#2E7D32;
+      margin-bottom:12px;
+      font-weight:900;
+    }
+
+    .empty-state p {
+      font-size:16px;
+      color:#558B2F;
+      font-weight:600;
+    }
+
+    /* ===== LIGHTBOX ===== */
+    .lightbox {
+      display:none;
+      position:fixed;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+      background:rgba(0,0,0,.9);
+      z-index:1000;
+      align-items:center;
+      justify-content:center;
+      animation:fadeIn .3s ease;
+    }
+
+    .lightbox.active {
+      display:flex;
+    }
+
+    .lightbox-content {
+      position:relative;
+      max-width:90%;
+      max-height:90%;
+      animation:zoomIn .3s ease;
+    }
+
+    .lightbox-content img {
+      max-width:100%;
+      max-height:90vh;
+      border-radius:8px;
+      box-shadow:0 20px 60px rgba(0,0,0,.5);
+    }
+
+    .lightbox-close {
+      position:absolute;
+      top:20px;
+      right:20px;
+      color:#fff;
+      font-size:40px;
+      cursor:pointer;
+      width:50px;
+      height:50px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:rgba(0,0,0,.5);
+      border-radius:50%;
+      transition:all .2s;
+    }
+
+    .lightbox-close:hover {
+      background:rgba(255,255,255,.2);
+      transform:rotate(90deg);
+    }
+
+    @keyframes fadeIn {
+      from{opacity:0}
+      to{opacity:1}
+    }
+
+    @keyframes zoomIn {
+      from{opacity:0;transform:scale(.7)}
+      to{opacity:1;transform:scale(1)}
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background:#1B5E20;
+      color:#ddd;
+      text-align:center;
+      padding:40px 24px;
+      margin-top:60px;
+      font-size:14px;
+      position:relative;
+      overflow:hidden;
+    }
+
+    footer::before {
+      content:"";
+      position:absolute;
+      top:0;
+      left:0;
+      right:0;
+      height:5px;
+      background:linear-gradient(90deg, #2E7D32, #4CAF50, #81C784, #A5D6A7);
+    }
+
+    .footer-content {
+      max-width:1000px;
+      margin:0 auto;
+      position:relative;
+      z-index:1;
+    }
+    .footer-text {
+      margin-bottom:12px;
+      font-weight:600;
+      font-size:16px;
+    }
+    .footer-links {
+      display:flex;
+      justify-content:center;
+      gap:24px;
+      margin-top:20px;
+    }
+    .footer-links a {
+      color:#aaa;
+      text-decoration:none;
+      transition:.3s;
+      font-weight:600;
+      padding:8px 16px;
+      border-radius:12px;
+    }
+    .footer-links a:hover {
+      color:#fff;
+      background:#4CAF50;
+      transform:translateY(-2px);
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media(max-width:768px){
+      body {
+        font-family:'Fredoka', 'Comic Sans MS', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      }
+      header h1 {font-size:36px}
+      header p {font-size:16px}
+      .nav-container {flex-direction:column;gap:16px;padding:16px}
+      nav ul {flex-wrap:wrap;justify-content:center}
+      .container {margin-top:-40px;padding:32px 20px;border-width:3px}
+      .section-title h2 {font-size:28px}
+      .materi-grid {grid-template-columns:1fr}
+      .materi-card {padding:24px 20px}
+      .materi-icon {font-size:52px}
+      .gallery-grid {grid-template-columns:1fr}
+      .doodle {font-size:35px !important}
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-container">
+      <div class="nav-brand">TK Islam Cikal Harapan 3</div>
+      <ul>
+        <li><a href="index.html">Profil</a></li>
+        <li><a href="foto_kbm.html">Foto KBM</a></li>
+        <li><a href="tka.html" class="active">TK A</a></li>
+        <li><a href="tkb.html">TK B</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <header>
+    <span class="doodle">🧸</span>
+    <span class="doodle">🎈</span>
+    <span class="doodle">🌈</span>
+    <span class="doodle">🖍️</span>
+    <span class="doodle">🧩</span>
+    <div class="header-content">
+      <h1>🎨 Karya TK A</h1>
+      <p>Dokumentasi hasil belajar dan karya siswa TK A</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- PETA MATERI -->
+    <section class="materi-section">
+      <div class="section-title">
+        <h2>📖 Peta Materi Pembelajaran</h2>
+        <p>Ringkasan materi yang dipelajari siswa TK A semester ini</p>
+      </div>
+
+      <div class="materi-grid">
+        <div class="materi-card">
+          <span class="materi-icon">🎨</span>
+          <h3>Kreativitas & Kognitif</h3>
+          <p>Pengembangan kemampuan kreativitas, kognitif, dan observasi</p>
+          <ul class="materi-topics">
+            <li>Bentuk dan Warnaku</li>
+            <li>Mencari Benda</li>
+            <li>Apa yang beda</li>
+            <li>Cailou Color and Shape</li>
+            <li>Can do Zoo</li>
+          </ul>
+        </div>
+
+        <div class="materi-card">
+          <span class="materi-icon">💻</span>
+          <h3>Teknologi & Seni Digital</h3>
+          <p>Pengenalan teknologi dan ekspresi kreatif digital</p>
+          <ul class="materi-topics">
+            <li>PTIK</li>
+            <li>Belajar Mewarnai</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- GALERI KARYA -->
+    <section class="karya-section">
+      <div class="section-title">
+        <h2>🖼️ Galeri Karya Siswa TK A</h2>
+        <p>Koleksi karya dan hasil praktik siswa TK A</p>
+      </div>
+
+      <div class="gallery-grid">
+        <div class="gallery-item" onClick="openLightbox('img/daneena1.jpg')" style="animation-delay: 0.1s;">
+          <img src="img/daneena1.jpg" alt="Karya Daneen A1">
+          <div class="gallery-caption">
+            <h3>Daneen A1</h3>
+            <p>Belajar Mewarnai</p>
+            <span class="gallery-tag">Belajar Mewarnai</span>
+          </div>
+        </div>
+
+        <div class="gallery-item" onClick="openLightbox('img/kiyomia1.jpg')" style="animation-delay: 0.2s;">
+          <img src="img/kiyomia1.jpg" alt="Karya Kiyomi A1">
+          <div class="gallery-caption">
+            <h3>Kiyomi A1</h3>
+            <p>Belajar Mewarnai</p>
+            <span class="gallery-tag">Belajar Mewarnai</span>
+          </div>
+        </div>
+
+        <div class="gallery-item" onClick="openLightbox('img/arsyaa2.jpg')" style="animation-delay: 0.3s;">
+          <img src="img/arsyaa2.jpg" alt="Karya Arsya A2">
+          <div class="gallery-caption">
+            <h3>Arsya A2</h3>
+            <p>Belajar Mewarnai</p>
+            <span class="gallery-tag">Belajar Mewarnai</span>
+          </div>
+        </div>
+
+        <div class="gallery-item" onClick="openLightbox('img/meutiaa2.jpg')" style="animation-delay: 0.4s;">
+          <img src="img/meutiaa2.jpg" alt="Karya Meutia A2">
+          <div class="gallery-caption">
+            <h3>Meutia A2</h3>
+            <p>Belajar Mewarnai</p>
+            <span class="gallery-tag">Belajar Mewarnai</span>
+          </div>
+        </div>
+
+        <div class="gallery-item" onClick="openLightbox('img/dharmaa3.jpg')" style="animation-delay: 0.5s;">
+          <img src="img/dharmaa3.jpg" alt="Karya Dharma A3">
+          <div class="gallery-caption">
+            <h3>Dharma A3</h3>
+            <p>Belajar Mewarnai</p>
+            <span class="gallery-tag">Belajar Mewarnai</span>
+          </div>
+        </div>
+
+        <div class="gallery-item" onClick="openLightbox('img/ikrama3.jpg')" style="animation-delay: 0.6s;">
+          <img src="img/ikrama3.jpg" alt="Karya Ikram A3">
+          <div class="gallery-caption">
+            <h3>Ikram A3</h3>
+            <p>Belajar Mewarnai</p>
+            <span class="gallery-tag">Belajar Mewarnai</span>
+          </div>
+        </div>
+
+        <div class="gallery-item" onClick="openLightbox('img/kiana4.jpg')" style="animation-delay: 0.7s;">
+          <img src="img/kiana4.jpg" alt="Karya Kian A4">
+          <div class="gallery-caption">
+            <h3>Kian A4</h3>
+            <p>Belajar Mewarnai</p>
+            <span class="gallery-tag">Belajar Mewarnai</span>
+          </div>
+        </div>
+
+        <div class="gallery-item" onClick="openLightbox('img/abiyyua4.jpg')" style="animation-delay: 0.8s;">
+          <img src="img/abiyyua4.jpg" alt="Karya Abiyyu A4">
+          <div class="gallery-caption">
+            <h3>Abiyyu A4</h3>
+            <p>Belajar Mewarnai</p>
+            <span class="gallery-tag">Belajar Mewarnai</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" onClick="closeLightbox()">
+    <span class="lightbox-close">&times;</span>
+    <div class="lightbox-content" onClick="event.stopPropagation()">
+      <img id="lightbox-img" src="" alt="Preview">
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-text">
+        <strong>© 2025 TK Islam Cikal Harapan 3</strong>
+      </div>
+      <div style="opacity:.8;margin-top:8px;font-size:13px;font-weight:500">
+        Dibuat dengan penuh kasih untuk anak-anak Indonesia 🎓
+      </div>
+      <div class="footer-links">
+        <a href="tentang.html">Tentang</a>
+        <a href="kontak.html">Kontak</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function openLightbox(imgSrc) {
+      document.getElementById('lightbox').classList.add('active');
+      document.getElementById('lightbox-img').src = imgSrc;
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('active');
+      document.body.style.overflow = 'auto';
+    }
+
+    // Close lightbox with ESC key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeLightbox();
+      }
+    });
+  </script>
+
+</body>
+</html>
